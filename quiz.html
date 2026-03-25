@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #EAF2E4;
+            color: black;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-top: 40px;
+        }
+
+        .box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+        }
+
+        .item {
+            background: #eee;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .correct {
+            background: #4CAF50 !important;
+            color: white;
+        }
+
+        .wrong {
+            background: #f44336 !important;
+            color: white;
+        }
+
+        #score {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        #timer {
+            font-size: 20px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Vocab Quiz</h1>
+
+<div class="container">
+
+<div class="box">
+<h3>Words</h3>
+{% for w in words %}
+<div class="item" onclick="selectWord(this)">
+{{ w.word }}
+</div>
+{% endfor %}
+</div>
+
+<div class="box">
+<h3>Meanings</h3>
+{% for m in meanings %}
+<div class="item" onclick="selectMeaning(this)" data-answer="{{m.word}}">
+{{ m.meaning }}
+</div>
+{% endfor %}
+</div>
+
+</div>
+
+<h2 id="score">Score: 0</h2>
+<a href="/">Home</a>
+
+<script>
+
+let selectedWord=null
+let score=0
+let time=0
+
+setInterval(()=>{
+time++
+document.getElementById("timer").innerText="⏱ Time: "+time
+},1000)
+
+function selectWord(el){
+selectedWord=el
+}
+
+function selectMeaning(el){
+
+if(!selectedWord) return
+
+let word=selectedWord.innerText
+let correct=el.dataset.answer
+
+if(word===correct){
+el.classList.add("correct")
+selectedWord.classList.add("correct")
+score++
+}else{
+el.classList.add("wrong")
+selectedWord.classList.add("wrong")
+}
+
+document.getElementById("score").innerText="Score: "+score
+selectedWord=null
+}
+
+</script>
+
+</body>
+</html>

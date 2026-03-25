@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Words</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #EAF2E4;
+            text-align: center;
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: white;
+            cursor: pointer;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Add Words</h1>
+
+<div class="box">
+
+<form action="/save_words" method="post">
+
+<input type="hidden" name="section_id" value="{{ section_id }}">
+
+{% for i in range(1,11) %}
+
+<input name="word{{i}}" placeholder="Word {{i}}">
+<input name="meaning{{i}}" placeholder="Meaning {{i}}">
+<br>
+
+{% endfor %}
+
+<button>Start quiz</button>
+
+</form>
+
+</div>
+
+<br><br>
+<a href="/">Back</a>
+
+</body>
+</html>

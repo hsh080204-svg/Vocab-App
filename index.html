@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocab App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #EAF2E4;
+            text-align: center;
+            color: black;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            color: black;
+            margin: 10px auto;
+            padding: 15px;
+            width: 300px;
+            border-radius: 15px;
+        }
+
+        a {
+            margin: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .review { color: green; }
+        .continue { color: blue; }
+        .delete { color: red; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Vocabulary App</h1>
+
+<form action="/add_section" method="post">
+    <input name="name" placeholder="Section name">
+    <button>Add</button>
+</form>
+
+<h3>Sections</h3>
+
+<ul>
+{% for s in sections %}
+<li>
+<b>{{ s.section_name }}</b><br>
+
+<a class="review" href="/quiz/{{ s.section_id }}"> Review</a>
+<a class="continue" href="/section/{{ s.section_id }}">️ Edit</a>
+<a class="delete" href="/delete_section/{{ s.section_id }}"> Delete</a>
+
+</li>
+{% endfor %}
+</ul>
+
+</div>
+
+</body>
+</html>
