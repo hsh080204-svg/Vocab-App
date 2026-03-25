@@ -4,26 +4,22 @@ import random
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def home():
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        
-        cursor.execute("SELECT 1")
-        
+
+        cursor.execute("SELECT * FROM sections")
+        sections = cursor.fetchall()
+
+        cursor.close()
         conn.close()
-        
-        return "DB connected!"
-        
+
+        return render_template("index.html", sections=sections)
+
     except Exception as e:
-        return str(e)
-
-    cursor.close()
-    conn.close()
-
-    return render_template("index.html", sections=sections)
+        return f"Database error: {e}"
 
 
 @app.route("/add_section", methods=["POST"])
