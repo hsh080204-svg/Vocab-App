@@ -7,12 +7,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("SELECT * FROM sections")
-    sections = cursor.fetchall()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT 1")
+        
+        conn.close()
+        
+        return "DB connected!"
+        
+    except Exception as e:
+        return str(e)
 
     cursor.close()
     conn.close()
