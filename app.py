@@ -6,20 +6,16 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
+    conn = get_connection()
+    cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM sections")
-        sections = cursor.fetchall()
+    cursor.execute("SELECT * FROM sections")
+    sections = cursor.fetchall()
 
-        cursor.close()
-        conn.close()
+    cursor.close()
+    conn.close()
 
-        return render_template("index.html", sections=sections)
-
-    except Exception as e:
-        return f"Database error: {e}"
+    return render_template("index.html", sections=sections)
 
 
 @app.route("/add_section", methods=["POST"])
