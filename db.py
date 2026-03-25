@@ -1,9 +1,4 @@
 import mysql.connector
-
-def get_connection():
-    return mysql.connector.connect(
-
-import mysql.connector
 import os
 
 def get_connection():
@@ -13,8 +8,4 @@ def get_connection():
         password=os.environ.get("MYSQLPASSWORD"),
         database=os.environ.get("MYSQLDATABASE"),
         port=os.environ.get("MYSQLPORT")
-    )
-        user="root",
-        password="12345678",
-        database="vocab_app"
     )
