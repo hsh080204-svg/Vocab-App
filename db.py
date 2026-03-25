@@ -7,5 +7,5 @@ def get_connection():
         user=os.environ.get("MYSQLUSER"),
         password=os.environ.get("MYSQLPASSWORD"),
         database=os.environ.get("MYSQLDATABASE"),
-        port=os.environ.get("MYSQLPORT")
+        port=int(os.environ.get("MYSQLPORT", 3306))
     )
